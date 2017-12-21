@@ -159,8 +159,6 @@ def semantic_vector(words, joint_words, info_content_norm):
     return semvec                
             
 def semantic_similarity(sentence_1, sentence_2 ):
-    #sentence_1 = re.sub('[^A-Za-z0-9\s]', '', row['question1']).lower()
-    #sentence_2 = re.sub('[^A-Za-z0-9\s]', '', row['question2']).lower()
     info_content_norm = True
     words_1 = nltk.word_tokenize(sentence_1)
     words_2 = nltk.word_tokenize(sentence_2)
