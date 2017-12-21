@@ -158,9 +158,9 @@ def semantic_vector(words, joint_words, info_content_norm):
         i = i + 1
     return semvec                
             
-def semantic_similarity(row):
-    sentence_1 = re.sub('[^A-Za-z0-9\s]', '', row['question1']).lower()
-    sentence_2 = re.sub('[^A-Za-z0-9\s]', '', row['question2']).lower()
+def semantic_similarity(sentence_1, sentence_2 ):
+    #sentence_1 = re.sub('[^A-Za-z0-9\s]', '', row['question1']).lower()
+    #sentence_2 = re.sub('[^A-Za-z0-9\s]', '', row['question2']).lower()
     info_content_norm = True
     words_1 = nltk.word_tokenize(sentence_1)
     words_2 = nltk.word_tokenize(sentence_2)
@@ -205,8 +205,8 @@ def word_order_similarity(sentence_1, sentence_2):
 
 # In[10]:
 
-def similarity(sentence_1, sentence_2, info_content_norm):
-    return DELTA * semantic_similarity(sentence_1, sentence_2, info_content_norm) +         (1.0 - DELTA) * word_order_similarity(sentence_1, sentence_2)
+def similarity(sentence_1, sentence_2):
+    return DELTA * semantic_similarity(sentence_1, sentence_2) +         (1.0 - DELTA) * word_order_similarity(sentence_1, sentence_2)
 
 
 # In[21]:
@@ -235,4 +235,15 @@ def jaccard_similarity_coefficient(sentence_1, sentence_2):
     
 
 
-# In[26]:
+if __name__ == '__main__' :
+    T1 = "RAM keeps things being worked with"
+    T2 = "The CPU uses RAM as a shortterm memory store"
+    similarity_score = similarity(T1, T2)
+    print("The similarity score of two sentences is: ", similarity_score)
+
+
+#Execute the function from your console using
+#python sentence_similarity.py
+
+#OUTPUT
+#The similarity score of two sentences is: 0.51861567435944533
