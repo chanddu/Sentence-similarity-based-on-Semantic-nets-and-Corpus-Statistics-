@@ -25,4 +25,6 @@ nltk<br>
 
 3. similarity.py has all the main functions and will be called in main.py. Compile similarity.py first to make sure there are no errors. Then call the main.py
 4. Put all the documents in text format to be compared for similarity.
+
+
 [Link]: https://ieeexplore.ieee.org/document/1644735/
