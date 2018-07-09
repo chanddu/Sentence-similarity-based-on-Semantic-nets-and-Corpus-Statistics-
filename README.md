@@ -24,7 +24,7 @@ nltk<br>
 [![Capture.png](https://s33.postimg.cc/9k8jg9167/Capture.png)](https://postimg.cc/image/q801iqvxn/)
 
 3. similarity.py has all the main functions and will be called in main.py. Compile similarity.py first to make sure there are no errors. Then call the main.py
-4. Put all the documents in text format to be compared for similarity.
+4. Put all the documents(text format) to be compared for similarity in the dataset sub-folder.
 
 
 [Link]: https://ieeexplore.ieee.org/document/1644735/
