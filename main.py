@@ -6,7 +6,8 @@ import time
 
 start = time.time()
 
-data_PATH=r'C:\Users\T01144\Desktop\T01144\IDLE Scripts\Text Analysis\dataset'
+#Link to the path of the sub-folder 'dataset'
+data_PATH=r'C:\Users\Rohan\Desktop\T01144\IDLE Scripts\Text Analysis\dataset'
 
 file_name = []
 file_text = []
@@ -15,15 +16,11 @@ for filename in os.listdir(data_PATH):
         
         with open(data_PATH+'\\'+filename) as ff:
             file_name.append(filename)
-            #print("For", filename)
             
             text = ff.readlines()[0]
-            #print(text)
+
             sent_text = nltk.sent_tokenize(text)
             file_text.append(sent_text)
-
-#print(file_text)
-#print("")
 
 simList = []
 
