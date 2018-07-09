@@ -1,4 +1,4 @@
-# Sentence-Similarity-based-on-Semantic-Nets-and-Corpus-Statistics-
+# Sentence Similarity based on Semantic Nets and Corpus Statistics
 This is an implementation of the paper written by Yuhua Li, David McLean, Zuhair A. Bandar, James D. O’Shea, and Keeley Crockett. [Link]
 
 The Sentence Similarity has been implemented as a linear combination of Semantic and Word order Similarity. Semantic and Word order Similarities are calculated from semantic and order vectors computed for each sentence with the assistance of wordnet.
