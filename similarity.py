@@ -1,10 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
-# Load libraries
-from pandas import read_csv
 from nltk.corpus import wordnet as wn
 from nltk.corpus import brown
 import math
@@ -13,29 +6,18 @@ import sys
 from nltk.corpus import stopwords
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
-import re
-from xgboost import XGBClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-
-# In[3]:
-
-
 
 ALPHA = 0.2
 BETA = 0.45
 ETA = 0.4
 PHI = 0.2
-DELTA = 0.85
+DELTA = 0.85 
 
 brown_freqs = dict()
 N = 0
 
 
-# In[8]:
-
-######################### word similarity ##########################
+# Word Similarity #
 def get_best_synset_pair(word_1, word_2):
     
     max_sim = -1.0
@@ -111,7 +93,7 @@ def word_similarity(word_1, word_2):
     return (length_dist(synset_pair[0], synset_pair[1]) * 
         hierarchy_dist(synset_pair[0], synset_pair[1]))
 
-######################### sentence similarity ##########################
+# Sentence Similarity #
 
 def most_similar_word(word, word_set):
     max_sim = -1.0
@@ -158,9 +140,7 @@ def semantic_vector(words, joint_words, info_content_norm):
         i = i + 1
     return semvec                
             
-def semantic_similarity(row):
-    sentence_1 = re.sub('[^A-Za-z0-9\s]', '', row['question1']).lower()
-    sentence_2 = re.sub('[^A-Za-z0-9\s]', '', row['question2']).lower()
+def semantic_similarity(sentence_1,sentence_2):
     info_content_norm = True
     words_1 = nltk.word_tokenize(sentence_1)
     words_2 = nltk.word_tokenize(sentence_2)
@@ -170,9 +150,7 @@ def semantic_similarity(row):
     return np.dot(vec_1, vec_2.T) / (np.linalg.norm(vec_1) * np.linalg.norm(vec_2))
 
 
-# In[9]:
-
-######################### word order similarity ##########################
+# Word Order Similarity #
 
 def word_order_vector(words, joint_words, windex):
     wovec = np.zeros(len(joint_words))
@@ -203,15 +181,11 @@ def word_order_similarity(sentence_1, sentence_2):
     return 1.0 - (np.linalg.norm(r1 - r2) / np.linalg.norm(r1 + r2))
 
 
-# In[10]:
-
-def similarity(sentence_1, sentence_2, info_content_norm):
-    return DELTA * semantic_similarity(sentence_1, sentence_2, info_content_norm) +         (1.0 - DELTA) * word_order_similarity(sentence_1, sentence_2)
+def similarity(sentence_1, sentence_2):
+    return DELTA * semantic_similarity(sentence_1, sentence_2) +         (1.0 - DELTA) * word_order_similarity(sentence_1, sentence_2)
 
 
-# In[21]:
-
-######################### tf-idf measures ##########################
+# TF-IDF Measures # 
 
 def tfidf_vector_similarity(sentence_1, sentence_2):
     corpus = [sentence_1, sentence_2]
@@ -222,9 +196,7 @@ def tfidf_vector_similarity(sentence_1, sentence_2):
     return sim
 
 
-# In[20]:
-
-######################### word overlap measures ##########################
+# Word Overlap Measures #
 
 def jaccard_similarity_coefficient(sentence_1, sentence_2):
     words_1 = nltk.word_tokenize(sentence_1)
@@ -233,6 +205,3 @@ def jaccard_similarity_coefficient(sentence_1, sentence_2):
     intersection_words = set(words_1).intersection(set(words_2))
     return len(intersection_words)/len(joint_words)
     
-
-
-# In[26]:
